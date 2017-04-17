@@ -5,11 +5,8 @@ package com.theironyard.charlotte;
  */
 public class User {
     String name;
-    String message;
 
-
-    public User(String name, String message) {
+    public User(String name) {
         this.name = name;
-        this.message = message;
     }
 }
