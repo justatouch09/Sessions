@@ -36,24 +36,26 @@ public class Main {
                 new MustacheTemplateEngine()
         );
 
-//        Spark.post(
-//                "/login",
-//                (request, response) -> {
-//                    String name = request.queryParams("loginName");
-//                    User user =
-//                    if (users.get(user) == null) {
-//                        user = new User(name);
-//
-//                        users.put(name, user);
-//                    } else {
-//                    }
-//                    Session session = request.session();
-//                    session.attribute("userName", name);
-//
-//                    response.redirect("/");
-//                    return "";
-//                }
-//        );
+        Spark.post(
+                "/login",
+                (request, response) -> {
+                    //get name form login
+                    String name = request.queryParams("loginName");
+                    User user = users.get(name);
+
+                    //if user is null make new user put into hasmap
+                    if (user == null) {
+                        user = new User(name);
+                        users.put(name, user);
+                    }
+
+                    Session session = request.session();
+                    session.attribute("userName", name);
+
+                    response.redirect("/");
+                    return "";
+                }
+        );
 
         Spark.post("/logout",
                 (request, response) -> {
