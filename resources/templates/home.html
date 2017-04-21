@@ -6,8 +6,9 @@
 </head>
 <body>
 Hello, {{name}}!
+
 <form action="/messages" method="post">
-    <input type="text" placeholder="Enter your message" name="message-text"/>
+    <input type="text" placeholder="Enter your message" name="messageText"/>
     <button type="submit">send</button>
 </form>
 List of messages {{#notes}} <p> {{text}} </p> {{/notes}}

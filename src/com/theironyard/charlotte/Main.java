@@ -65,5 +65,38 @@ public class Main {
                     return "";
                 }
         );
+
+        Spark.post("/messages",
+                (req, res) -> {
+                    //get username from session
+                    //if isnt in session redirect to homepage and return;
+                    Session session = req.session();
+
+                    // try to get username from session
+                    String userName = session.attribute("userName");
+
+                    // if we found the username in session..
+                    if (userName != null) {
+                        // retrieve the current user from the users hashmap.
+                        User user = users.get(userName);
+
+                        // make a message object from the text that was posted
+                        String text = req.queryParams("messageText");
+                        Message message = new Message(text);
+
+                        // add the message we just created to the user's arraylist of
+                        // messages
+                        user.messageList.add(message);
+                    }
+
+                    // always redirect back to the homepage
+                    res.redirect("/");
+
+                    // return an empty string because that's what Spark.post's lambda expects.
+                    return "";
+                }
+        );
+
+
     }
 }
